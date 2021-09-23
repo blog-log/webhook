@@ -1,0 +1,8 @@
+apiVersion: x.getambassador.io/v3alpha1
+kind: AmbassadorMapping
+metadata:
+  name: webhook
+spec:
+  hostname: "*"
+  prefix: /api/v1/webhook/ # root
+  service: kustomize-webhook:8000
