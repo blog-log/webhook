@@ -1,21 +1,15 @@
-FROM denoland/deno:1.14.1
-
-# The port that your application listens to.
-EXPOSE 8000
+FROM golang:1.16-alpine
 
 WORKDIR /app
 
-# Prefer not to run as root.
-USER deno
+COPY go.mod ./
+COPY go.sum ./
+RUN go mod download
 
-# Cache the dependencies as a layer (the following two steps are re-run only when deps.ts is modified).
-# Ideally cache deps.ts will download and compile _all_ external files used in main.ts.
-# COPY deps.ts .
-# RUN deno cache deps.ts
+COPY . .
 
-# These steps will be re-run upon each file change in your working directory:
-ADD . .
-# Compile the main app so that it doesn't need to be compiled each startup/entry.
-RUN deno cache main.ts
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o /app/server /app/cmd/server/main.go
 
-CMD ["run", "--allow-net", "--allow-read", "main.ts"]
+EXPOSE 8080
+
+CMD [ "/app/server" ]
