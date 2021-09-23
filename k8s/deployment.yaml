@@ -14,7 +14,7 @@ spec:
         app: webhook
     spec:
       containers:
-        - image: cheapacr.azurecr.io/webhook:e645af1b38ae9e97a3fa220dc64e271511bc3372
+        - image: cheapacr.azurecr.io/webhook:a674df7bf179bb2b2f6268901212cbc9e35f8686
           name: webhook
           ports:
-            - containerPort: 8000
+            - containerPort: 8080
