@@ -18,6 +18,3 @@ spec:
           name: webhook
           ports:
             - containerPort: 8000
-          envFrom:
-          - secretRef:
-              name: webhook-secret
