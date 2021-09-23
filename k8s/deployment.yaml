@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webhook
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: webhook
+  template:
+    metadata:
+      labels:
+        app: webhook
+    spec:
+      containers:
+        - image: cheapacr.azurecr.io/webhook:bc272514303c4be2c2f47a39ea9c2984385e7821
+          name: webhook
+          ports:
+            - containerPort: 8000
+          envFrom:
+          - secretRef:
+              name: webhook-secret
