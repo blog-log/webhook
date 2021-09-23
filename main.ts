@@ -12,7 +12,7 @@ router.post("/payload", async (context) => {
   console.log("processing request");
 
   const payload = await context.request.body().value;
-  const signature = context.request.headers.get("x-hub-signature-256") || "";
+  const signature = context.request.headers.get("X-Hub-Signature") || "";
 
   const valid = await webhooks.verify(payload, signature);
 
