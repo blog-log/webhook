@@ -19,5 +19,7 @@ spec:
           ports:
             - containerPort: 8080
           envFrom:
-          - secretRef:
-              name: webhook-secret
+            - secretRef:
+                name: webhook-secret
+            - configMapRef:
+                name: services-config
