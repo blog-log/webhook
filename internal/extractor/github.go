@@ -62,7 +62,7 @@ func (e *GithubExtractor) ExtractInstallationEvent(ctx context.Context, event in
 		repos = append(repos, fmt.Sprintf("https://github.com/%s", *repository.FullName))
 	}
 
-	switch event.(map[string]interface{})["action"] {
+	switch *ghEvent.Action {
 	case "created":
 		return repos, nil, nil
 	case "deleted":
