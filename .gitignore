@@ -16,4 +16,4 @@
 # Dependency directories (remove the comment below to include it)
 # vendor/
 
-k8s/secret.yaml
+k8s/*secret*.yaml
